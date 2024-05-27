@@ -33,6 +33,24 @@ def QA_response(text):
         )
     return output.answers[0].answer
 
+def words_English_to_Chinese(word):
+    # 字母與數字的映射字典
+    words_dict = {
+        "apple": "蘋果",
+        "banana": "香蕉",
+        "cat": "貓",
+        "dog": "狗",
+        "elephant": "大象",
+        "flower": "花",
+        "guitar": "吉他",
+        "house": "房子",
+        "ice": "冰",
+        "jacket": "夾克"
+    }
+
+    return words_English_to_Chinese(word)
+
+
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -53,7 +71,8 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(msg))
+    word=words_English_to_Chinese(msg)
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(word))
          
 
 @handler.add(PostbackEvent)
