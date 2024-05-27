@@ -63,7 +63,7 @@ def QA(Q):
         "你對這次心理輔導有什麼目標？": "我希望學會更好地管理壓力，並提高我的整體幸福感。",
         "還有什麼你認為我應該知道的嗎？": "我有時覺得自己不夠好，這影響了我的自信心。"
     }
-   return QA.get(A)
+    return QA.get(A)
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
