@@ -22,37 +22,6 @@ line_bot_api = LineBotApi(os.getenv('CHANNEL_ACCESS_TOKEN'))
 # Channel Secret
 handler = WebhookHandler(os.getenv('CHANNEL_SECRET'))
 
-def QA_response(text):
-    client = QuestionAnsweringClient(endpoint, credential)
-    with client:
-        question=text
-        output = client.get_answers(
-            question = question,
-            project_name=knowledge_base_project,
-            deployment_name=deployment
-        )
-    return output.answers[0].answer
-
-def words_English_to_Chinese(word):
-    # 字母與數字的映射字典
-    words_dict = {
-        "apple": "蘋果",
-        "banana": "香蕉",
-        "cat": "貓",
-        "dog": "狗",
-        "elephant": "大象",
-        "flower": "花",
-        "guitar": "吉他",
-        "house": "房子",
-        "ice": "冰",
-        "jacket": "夾克"
-    }
-    if word in words_dict:
-        word=words_dict[word]
-    else:
-        word="該單字不在字典中。"
-    return words_English_to_Chinese(word)
-
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -74,7 +43,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-#    word=words_English_to_Chinese(msg)
     line_bot_api.reply_message(event.reply_token, TextSendMessage(msg))
          
 
