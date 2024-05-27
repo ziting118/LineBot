@@ -69,7 +69,13 @@ def QA(Q):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(msg))
+    if msg in questions_answers:
+        #print(f"{english_word} 的中文翻譯是：{words_dict[english_word]}")
+
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(questions_answers[msg]))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(msg))
+       
          
 
 @handler.add(PostbackEvent)
