@@ -47,7 +47,10 @@ def words_English_to_Chinese(word):
         "ice": "冰",
         "jacket": "夾克"
     }
-
+    if word in words_dict:
+        word=words_dict[word]
+    else:
+        word="該單字不在字典中。"
     return words_English_to_Chinese(word)
 
 
